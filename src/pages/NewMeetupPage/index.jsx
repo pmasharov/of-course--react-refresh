@@ -1,6 +1,9 @@
 import { NewMeetupForm } from "components";
+import { useNavigate } from "react-router-dom";
 
 const NewMeetupPage = () => {
+	const navigate = useNavigate();
+
 	const saveMeetup = (meetupData) => {
 		fetch(
 			"https://of-course--react-refresh-default-rtdb.europe-west1.firebasedatabase.app/meetups.json",
@@ -11,7 +14,13 @@ const NewMeetupPage = () => {
 					"Content-Type": "application/json",
 				},
 			}
-		);
+		)
+			.then(() => {
+				navigate("/", { replace: true });
+			})
+			.catch((e) => {
+				console.error(e);
+			});
 	};
 
 	return (

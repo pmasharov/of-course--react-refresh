@@ -1,26 +1,27 @@
 import { MeetupList } from "components";
-const meetups = [
-	{
-		id: "m1",
-		title: "This is a first meetup",
-		imageSrc:
-			"https://static.nationalgeographic.co.uk/files/styles/image_3200/public/warsawhero.jpg?w=1600&h=1067&q=100",
-		address: "street 3, 12345 Meetup City",
-		description:
-			"This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!",
-	},
-	{
-		id: "m2",
-		title: "This is a second meetup",
-		imageSrc:
-			"https://italiantripabroad.it/Blog/wp-content/uploads/2020/12/Warsaw-in-winter-Christmas-Market-of-Warsaw-Square.jpg",
-		address: "street 5, 12345 Meetup City",
-		description:
-			"This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!",
-	},
-];
+import { useEffect, useState } from "react";
 
 const AllMeetupsPage = () => {
+	const [meetups, setMeetups] = useState([]);
+
+	useEffect(() => {
+		fetch(
+			"https://of-course--react-refresh-default-rtdb.europe-west1.firebasedatabase.app/meetups.json"
+		)
+			.then((response) => response.json())
+			.then((meetupsObj) => {
+				const meetupsList = [];
+				for (const meetupId in meetupsObj) {
+					meetupsList.push({
+						id: meetupId,
+						...meetupsObj[meetupId],
+					});
+				}
+				return meetupsList;
+			})
+			.then((meetupsList) => setMeetups(meetupsList));
+	}, []);
+
 	return (
 		<>
 			All meetups
