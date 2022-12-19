@@ -1,3 +1,2 @@
-import { MeetupList } from "./MeetupList";
-
-export { MeetupList };
+export { MeetupList } from "./MeetupList";
+export { NewMeetupForm } from "./NewMeetupForm";
