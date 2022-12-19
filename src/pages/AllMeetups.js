@@ -37,7 +37,11 @@ const AllMeetupsPage = () => {
 	const [meetups, isLoading] = useFetchMeetups();
 
 	if (isLoading) {
-		return <section>...Loading</section>;
+		return (
+			<section>
+				<p>Loading...</p>
+			</section>
+		);
 	}
 
 	return (
