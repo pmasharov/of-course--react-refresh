@@ -11,7 +11,7 @@ const Navigation = () => {
 					<Link to={"/favorites"}>Favorites</Link>
 				</li>
 				<li>
-					<Link to={"new-meetup"}>New meetup</Link>
+					<Link to={"new-meetup"}>Add new meetup</Link>
 				</li>
 			</ul>
 		</nav>
