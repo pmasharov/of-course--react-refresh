@@ -1,7 +1,17 @@
 import styles from "./styles.module.scss";
 import { Card } from "components";
+import { useContext } from "react";
+import { FavoritesContext } from "store/favorites";
 
-const MeetupItem = ({ imageSrc, title, address, description }) => {
+const MeetupItem = ({ id, imageSrc, title, address, description }) => {
+	const favoritesCtx = useContext(FavoritesContext);
+	const isFavorite = favoritesCtx.check(id);
+
+	const toggleFavorite = (id) => {
+		if (isFavorite) favoritesCtx.remove(id);
+		else favoritesCtx.add({ id, imageSrc, title, address, description });
+	};
+
 	return (
 		<li className={styles.item}>
 			<Card>
@@ -14,7 +24,9 @@ const MeetupItem = ({ imageSrc, title, address, description }) => {
 					<p>{description}</p>
 				</div>
 				<div className={styles.actions}>
-					<button>To favorites</button>
+					<button onClick={() => toggleFavorite(id)}>
+						{isFavorite ? "Remove from favorites" : "Add to favorites"}
+					</button>
 				</div>
 			</Card>
 		</li>
